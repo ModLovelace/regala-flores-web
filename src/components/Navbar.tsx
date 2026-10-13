@@ -10,19 +10,19 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 sm:h-18">
           
           {/* Logo & Marca Editorial */}
-          <a href="#" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 border border-amber-300/70 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+          <a href="#" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 border border-amber-300/70 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden shrink-0">
               <img
                 src="/sticker-sunflower.png"
                 alt="Logo Regala Flores"
                 className="w-full h-full object-contain filter drop-shadow-xs"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-serif font-bold text-lg sm:text-xl text-stone-900 tracking-tight whitespace-nowrap">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="font-serif font-bold text-base sm:text-xl text-stone-900 tracking-tight whitespace-nowrap">
                 Regala Flores
               </span>
-              <span className="text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-900 border border-amber-400/30 whitespace-nowrap">
+              <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-900 border border-amber-400/30 whitespace-nowrap">
                 Web Oficial
               </span>
             </div>
@@ -68,19 +68,19 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Botón menú móvil */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
             <a
               href="https://flores.modlovelace.com"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500 text-stone-950 font-bold text-xs shadow-2xs whitespace-nowrap"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-full bg-amber-500 text-stone-950 font-bold text-xs shadow-2xs whitespace-nowrap"
             >
               <span>Personalizar</span>
               <span className="text-[10px]">↗</span>
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-stone-600 hover:bg-stone-200/60 transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl text-stone-600 hover:bg-stone-200/60 transition-colors"
               aria-label="Abrir menú"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
