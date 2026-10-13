@@ -28,38 +28,38 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Navegación Desktop - Limpia, horizontal y sin wrapping */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-sans font-medium text-stone-600">
-            <a href="#ocasiones" className="hover:text-stone-950 transition-colors whitespace-nowrap">
+          {/* Navegación Desktop - Limpia, horizontal, concisa y sin wrapping */}
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-xs xl:text-sm font-sans font-medium text-stone-600">
+            <a href="#ocasiones" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
               Ocasiones
             </a>
-            <a href="#guia" className="hover:text-stone-950 transition-colors whitespace-nowrap">
-              Guía Paso a Paso
+            <a href="#guia" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
+              Guía
             </a>
-            <a href="#simulador" className="hover:text-stone-950 transition-colors whitespace-nowrap">
+            <a href="#simulador" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
               Simulador
             </a>
-            <a href="#audio" className="hover:text-stone-950 transition-colors whitespace-nowrap">
+            <a href="#audio" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
               Audio Procedural
             </a>
+          </nav>
+
+          {/* Botones de Acción Derecha */}
+          <div className="hidden sm:flex items-center gap-3 xl:gap-4 shrink-0">
             <a
               href="https://github.com/ModLovelace/flores-amarillas-primavera"
               target="_blank"
               rel="noreferrer"
-              className="text-stone-400 hover:text-stone-700 transition-colors flex items-center gap-1 whitespace-nowrap pl-1"
+              className="hidden xl:inline-flex items-center gap-1 text-xs text-stone-500 hover:text-stone-900 transition-colors whitespace-nowrap"
             >
               <span>GitHub</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
-          </nav>
-
-          {/* Botón CTA Principal */}
-          <div className="hidden sm:flex items-center gap-3 shrink-0">
             <a
               href="https://flores.modlovelace.com"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-stone-950 font-bold text-xs sm:text-sm font-sans transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-stone-950 font-bold text-xs sm:text-sm font-sans transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
             >
               <Sparkles className="w-3.5 h-3.5 text-stone-950 fill-stone-950" />
               <span>Personalizar en Vivo</span>
