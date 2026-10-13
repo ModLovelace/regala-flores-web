@@ -78,7 +78,19 @@ const PREVIEW_THEMES: PreviewTheme[] = [
 ];
 
 export const Hero: React.FC = () => {
-  const [activeThemeIdx, setActiveThemeIdx] = useState(0);
+  const [activeThemeIdx, setActiveThemeIdx] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const requested = params.get('theme') || params.get('preview');
+      if (requested) {
+        const found = PREVIEW_THEMES.findIndex(
+          (t) => t.id === requested || t.label.toLowerCase() === requested.toLowerCase()
+        );
+        if (found !== -1) return found;
+      }
+    }
+    return 0;
+  });
   const activeTheme = PREVIEW_THEMES[activeThemeIdx];
   const ActiveComponent = activeTheme.Component;
 
