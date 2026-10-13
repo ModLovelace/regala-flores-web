@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, ArrowRight, BookOpen, Music, ShieldCheck, Share2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import {
@@ -34,7 +34,7 @@ const PREVIEW_THEMES: PreviewTheme[] = [
     borderColor: "border-amber-300/70 dark:border-amber-500/30",
     activeTabColor: "bg-amber-500 text-stone-950 border-amber-400 font-bold shadow-xs",
     Component: SunflowerBouquetSVG,
-    confettiColors: ["#FDE047", "#FACC15", "#EAB308", "#CA8A04"],
+    confettiColors: ["#FDE047", "#FACC15", "#EAB308", "#CA8A04", "#FEF08A"],
   },
   {
     id: "cumpleanos",
@@ -47,7 +47,7 @@ const PREVIEW_THEMES: PreviewTheme[] = [
     borderColor: "border-pink-300/70 dark:border-pink-500/30",
     activeTabColor: "bg-pink-500 text-white border-pink-400 font-bold shadow-xs",
     Component: BirthdayCakeSVG,
-    confettiColors: ["#F472B6", "#FB7185", "#EC4899", "#FDE047"],
+    confettiColors: ["#F472B6", "#FB7185", "#EC4899", "#FDE047", "#38BDF8", "#A855F7"],
   },
   {
     id: "logro-profesional",
@@ -60,7 +60,7 @@ const PREVIEW_THEMES: PreviewTheme[] = [
     borderColor: "border-blue-300/70 dark:border-blue-500/30",
     activeTabColor: "bg-blue-600 text-white border-blue-500 font-bold shadow-xs",
     Component: TrophyLaurelSVG,
-    confettiColors: ["#60A5FA", "#38BDF8", "#FBBF24", "#10B981"],
+    confettiColors: ["#FBBF24", "#F59E0B", "#10B981", "#34D399", "#60A5FA", "#3B82F6"],
   },
   {
     id: "aniversario",
@@ -73,9 +73,65 @@ const PREVIEW_THEMES: PreviewTheme[] = [
     borderColor: "border-rose-300/70 dark:border-rose-500/30",
     activeTabColor: "bg-rose-500 text-white border-rose-400 font-bold shadow-xs",
     Component: RosesBouquetSVG,
-    confettiColors: ["#F43F5E", "#E11D48", "#FB7185", "#FDA4AF"],
+    confettiColors: ["#F43F5E", "#E11D48", "#FB7185", "#FDA4AF", "#BE123C", "#FBBF24"],
   },
 ];
+
+// Caché de formas temáticas para alto rendimiento sin saturar memoria
+const THEMATIC_SHAPES_CACHE = new Map<string, confetti.Shape[]>();
+
+function getThematicShapes(themeId: string): confetti.Shape[] {
+  if (THEMATIC_SHAPES_CACHE.has(themeId)) {
+    return THEMATIC_SHAPES_CACHE.get(themeId)!;
+  }
+
+  const shapes: confetti.Shape[] = [];
+  try {
+    if (typeof confetti.shapeFromText === 'function') {
+      if (themeId === 'cumpleanos') {
+        shapes.push(
+          'square',
+          'circle',
+          confetti.shapeFromText({ text: '🎉', scalar: 1.8 }),
+          confetti.shapeFromText({ text: '🎂', scalar: 1.8 }),
+          confetti.shapeFromText({ text: '✨', scalar: 1.4 })
+        );
+      } else if (themeId === 'flores-amarillas') {
+        shapes.push(
+          'circle',
+          confetti.shapeFromText({ text: '🌻', scalar: 2.0 }),
+          confetti.shapeFromText({ text: '🌼', scalar: 1.8 }),
+          confetti.shapeFromText({ text: '✨', scalar: 1.4 })
+        );
+      } else if (themeId === 'logro-profesional') {
+        shapes.push(
+          'circle',
+          confetti.shapeFromText({ text: '🎓', scalar: 2.0 }),
+          confetti.shapeFromText({ text: '⭐', scalar: 1.8 }),
+          confetti.shapeFromText({ text: '🏆', scalar: 2.0 }),
+          confetti.shapeFromText({ text: '✨', scalar: 1.4 })
+        );
+      } else if (themeId === 'aniversario') {
+        shapes.push(
+          'circle',
+          confetti.shapeFromText({ text: '💖', scalar: 2.0 }),
+          confetti.shapeFromText({ text: '❤️', scalar: 1.8 }),
+          confetti.shapeFromText({ text: '🌹', scalar: 2.0 }),
+          confetti.shapeFromText({ text: '✨', scalar: 1.4 })
+        );
+      }
+    }
+  } catch {
+    // Si OffscreenCanvas no está disponible, degradación suave
+  }
+
+  if (shapes.length === 0) {
+    shapes.push('circle', 'square');
+  }
+
+  THEMATIC_SHAPES_CACHE.set(themeId, shapes);
+  return shapes;
+}
 
 export const Hero: React.FC = () => {
   const [activeThemeIdx, setActiveThemeIdx] = useState<number>(() => {
@@ -91,21 +147,64 @@ export const Hero: React.FC = () => {
     }
     return 0;
   });
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const cannonRef = useRef<confetti.CreateTypes | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (cannonRef.current) {
+        cannonRef.current.reset();
+        cannonRef.current = null;
+      }
+    };
+  }, []);
+
   const activeTheme = PREVIEW_THEMES[activeThemeIdx];
   const ActiveComponent = activeTheme.Component;
 
-  const handleSelectTheme = (index: number) => {
-    setActiveThemeIdx(index);
+  // Disparo de partículas confinado exclusivamente al espacio físico del recuadro
+  const fireThematicParticles = (theme: PreviewTheme) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
     try {
-      confetti({
-        particleCount: 26,
-        spread: 55,
-        origin: { y: 0.6 },
-        colors: PREVIEW_THEMES[index].confettiColors,
+      // Sincronizar dimensiones internas del canvas con su tamaño en pantalla
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        if (canvas.width !== rect.width || canvas.height !== rect.height) {
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+      }
+
+      if (!cannonRef.current) {
+        cannonRef.current = confetti.create(canvas, {
+          resize: true,
+          useWorker: false,
+        });
+      }
+
+      const shapes = getThematicShapes(theme.id);
+      cannonRef.current({
+        particleCount: theme.id === 'cumpleanos' ? 40 : 34,
+        spread: theme.id === 'cumpleanos' ? 68 : 58,
+        startVelocity: theme.id === 'cumpleanos' ? 32 : 28,
+        origin: { x: 0.5, y: 0.72 },
+        colors: theme.confettiColors,
+        shapes,
+        gravity: theme.id === 'cumpleanos' ? 0.95 : 0.8,
+        ticks: 120,
+        disableForReducedMotion: true,
       });
     } catch {
       // safe fallback
     }
+  };
+
+  const handleSelectTheme = (index: number) => {
+    setActiveThemeIdx(index);
+    fireThematicParticles(PREVIEW_THEMES[index]);
   };
 
   const handleCycleNext = () => {
@@ -215,6 +314,12 @@ export const Hero: React.FC = () => {
                 title="Haz clic para cambiar temática (Flores ➔ Torta ➔ Logro ➔ Amor)"
                 className={`relative aspect-square rounded-2xl bg-gradient-to-b ${activeTheme.bgGradient} border ${activeTheme.borderColor} flex flex-col items-center justify-center p-4 overflow-hidden group cursor-pointer transition-all duration-500 hover:shadow-lg active:scale-[0.98] select-none`}
               >
+                {/* Canvas de partículas temáticas confinado estrictamente al recuadro */}
+                <canvas
+                  ref={canvasRef}
+                  className="absolute inset-0 w-full h-full pointer-events-none z-20"
+                />
+
                 {/* SVG Ilustrado de la Pieza Central */}
                 <div className="w-full h-full max-h-[230px] flex items-center justify-center p-2 transition-transform duration-500 group-hover:scale-105">
                   <ActiveComponent bloomStage={3} />
