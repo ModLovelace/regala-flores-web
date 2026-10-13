@@ -163,6 +163,21 @@ export const Hero: React.FC = () => {
   const activeTheme = PREVIEW_THEMES[activeThemeIdx];
   const ActiveComponent = activeTheme.Component;
 
+  // Actualizar favicon según la temática activa de la vitrina (en cumpleaños mostrar 🎂 sin flor)
+  useEffect(() => {
+    const l = document.querySelector("link[rel~='icon']") as HTMLLinkElement | null;
+    if (!l) return;
+    if (activeTheme.id === 'cumpleanos') {
+      l.href = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎂</text></svg>');
+    } else if (activeTheme.id === 'logro-profesional') {
+      l.href = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎓</text></svg>');
+    } else if (activeTheme.id === 'aniversario') {
+      l.href = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💖</text></svg>');
+    } else {
+      l.href = '/sticker-sunflower.png';
+    }
+  }, [activeTheme.id]);
+
   // Disparo de partículas confinado exclusivamente al espacio físico del recuadro
   const fireThematicParticles = (theme: PreviewTheme) => {
     const canvas = canvasRef.current;
