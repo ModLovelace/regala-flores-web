@@ -1,7 +1,106 @@
-import React from 'react';
-import { Sparkles, ArrowRight, BookOpen, Music, Heart, ShieldCheck, Share2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sparkles, ArrowRight, BookOpen, Music, ShieldCheck, Share2 } from 'lucide-react';
+import confetti from 'canvas-confetti';
+import {
+  SunflowerBouquetSVG,
+  BirthdayCakeSVG,
+  TrophyLaurelSVG,
+  RosesBouquetSVG,
+} from './Centerpieces';
+
+interface PreviewTheme {
+  id: string;
+  emoji: string;
+  label: string;
+  title: string;
+  sub: string;
+  badge: string;
+  bgGradient: string;
+  borderColor: string;
+  activeTabColor: string;
+  Component: React.ComponentType<{ bloomStage?: number }>;
+  confettiColors: string[];
+}
+
+const PREVIEW_THEMES: PreviewTheme[] = [
+  {
+    id: "flores-amarillas",
+    emoji: "🌻",
+    label: "Flores",
+    title: "Flores Amarillas",
+    sub: "Primavera & Luz",
+    badge: "🌻 Floración interactiva al tacto",
+    bgGradient: "from-amber-100/90 via-yellow-50/60 to-stone-50",
+    borderColor: "border-amber-300/70",
+    activeTabColor: "bg-amber-500 text-stone-950 border-amber-400 font-bold shadow-xs",
+    Component: SunflowerBouquetSVG,
+    confettiColors: ["#FDE047", "#FACC15", "#EAB308", "#CA8A04"],
+  },
+  {
+    id: "cumpleanos",
+    emoji: "🎂",
+    label: "Cumple",
+    title: "Feliz Cumpleaños",
+    sub: "Pastel & Velas Festivas",
+    badge: "🎂 Torta festiva con velas encendidas",
+    bgGradient: "from-pink-100/90 via-rose-50/60 to-stone-50",
+    borderColor: "border-pink-300/70",
+    activeTabColor: "bg-pink-500 text-white border-pink-400 font-bold shadow-xs",
+    Component: BirthdayCakeSVG,
+    confettiColors: ["#F472B6", "#FB7185", "#EC4899", "#FDE047"],
+  },
+  {
+    id: "logro-profesional",
+    emoji: "🎓",
+    label: "Logro",
+    title: "Logro Profesional",
+    sub: "Copa de Victoria & Laureles",
+    badge: "🎓 Copa triunfal & laureles dorados",
+    bgGradient: "from-blue-100/90 via-indigo-50/60 to-stone-50",
+    borderColor: "border-blue-300/70",
+    activeTabColor: "bg-blue-600 text-white border-blue-500 font-bold shadow-xs",
+    Component: TrophyLaurelSVG,
+    confettiColors: ["#60A5FA", "#38BDF8", "#FBBF24", "#10B981"],
+  },
+  {
+    id: "aniversario",
+    emoji: "💖",
+    label: "Amor",
+    title: "Aniversario & Amor",
+    sub: "Rosas Rojas & Corazones",
+    badge: "💖 Rosas aterciopeladas & corazones",
+    bgGradient: "from-rose-100/90 via-red-50/60 to-stone-50",
+    borderColor: "border-rose-300/70",
+    activeTabColor: "bg-rose-500 text-white border-rose-400 font-bold shadow-xs",
+    Component: RosesBouquetSVG,
+    confettiColors: ["#F43F5E", "#E11D48", "#FB7185", "#FDA4AF"],
+  },
+];
 
 export const Hero: React.FC = () => {
+  const [activeThemeIdx, setActiveThemeIdx] = useState(0);
+  const activeTheme = PREVIEW_THEMES[activeThemeIdx];
+  const ActiveComponent = activeTheme.Component;
+
+  const handleSelectTheme = (index: number) => {
+    setActiveThemeIdx(index);
+    try {
+      confetti({
+        particleCount: 26,
+        spread: 55,
+        origin: { y: 0.6 },
+        colors: PREVIEW_THEMES[index].confettiColors,
+      });
+    } catch {
+      // safe fallback
+    }
+  };
+
+  const handleCycleNext = () => {
+    const nextIdx = (activeThemeIdx + 1) % PREVIEW_THEMES.length;
+    handleSelectTheme(nextIdx);
+  };
+
   return (
     <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 overflow-hidden">
       {/* Luces y degradados sutiles de fondo */}
@@ -70,15 +169,17 @@ export const Hero: React.FC = () => {
 
           {/* Columna Visual / Vitrina Interactiva */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-[380px] sm:max-w-[420px] rounded-3xl p-6 sm:p-7 bg-white/80 backdrop-blur-xl border border-stone-200/80 shadow-2xl shadow-stone-300/40 space-y-6">
+            <div className="relative w-full max-w-[380px] sm:max-w-[420px] rounded-3xl p-6 sm:p-7 bg-white/90 backdrop-blur-xl border border-stone-200/90 shadow-2xl shadow-stone-300/40 space-y-5">
               
-              {/* Encabezado de tarjeta vitrina */}
-              <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+              {/* Encabezado de tarjeta vitrina dinámico */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-stone-100">
                 <div className="flex items-center gap-2.5">
-                  <span className="text-2xl animate-bounce">🌻</span>
+                  <span className="text-2xl transition-transform duration-300 hover:scale-125 select-none">
+                    {activeTheme.emoji}
+                  </span>
                   <div>
-                    <h3 className="font-serif font-bold text-sm text-stone-900 leading-tight">
-                      Regala Flores
+                    <h3 className="font-serif font-bold text-sm text-stone-900 leading-tight transition-colors">
+                      Regala Flores · {activeTheme.label}
                     </h3>
                     <p className="text-[11px] font-mono text-stone-500">
                       flores.modlovelace.com
@@ -91,54 +192,75 @@ export const Hero: React.FC = () => {
                 </span>
               </div>
 
-              {/* Centro de atracción ilustrado */}
-              <div className="relative aspect-square rounded-2xl bg-gradient-to-b from-amber-50/80 via-yellow-50/40 to-stone-50 border border-amber-200/50 flex flex-col items-center justify-center p-6 overflow-hidden group">
-                <img
-                  src="/sticker-sunflower.png"
-                  alt="Ramo de flores doradas"
-                  className="w-44 h-44 object-contain filter drop-shadow-md group-hover:scale-105 transition-transform duration-500 animate-float-soft"
-                />
+              {/* Centro de atracción ilustrado e interactivo con cambio al clic */}
+              <div
+                onClick={handleCycleNext}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') handleCycleNext();
+                }}
+                title="Haz clic para cambiar temática (Flores ➔ Torta ➔ Logro ➔ Amor)"
+                className={`relative aspect-square rounded-2xl bg-gradient-to-b ${activeTheme.bgGradient} border ${activeTheme.borderColor} flex flex-col items-center justify-center p-4 overflow-hidden group cursor-pointer transition-all duration-500 hover:shadow-lg active:scale-[0.98] select-none`}
+              >
+                {/* SVG Ilustrado de la Pieza Central */}
+                <div className="w-full h-full max-h-[230px] flex items-center justify-center p-2 transition-transform duration-500 group-hover:scale-105">
+                  <ActiveComponent bloomStage={3} />
+                </div>
 
-                <div className="absolute bottom-3 inset-x-3 text-center">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-stone-200/80 text-[11px] font-mono font-medium text-stone-700 shadow-2xs">
+                {/* Badge flotante inferior descriptivo */}
+                <div className="absolute bottom-3 inset-x-3 text-center pointer-events-none">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-stone-200/80 text-[11px] font-mono font-medium text-stone-700 shadow-2xs group-hover:border-stone-300 transition-colors">
                     <Sparkles className="w-3 h-3 text-amber-500 fill-amber-500" />
-                    <span>Floración interactiva al tacto</span>
+                    <span>{activeTheme.badge}</span>
                   </div>
+                </div>
+
+                {/* Indicador táctil flotante superior */}
+                <div className="absolute top-2.5 right-2.5 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  <span className="px-2 py-0.5 rounded-md bg-white/80 border border-stone-200/60 text-[10px] font-mono text-stone-600 shadow-2xs">
+                    Toca para cambiar ↻
+                  </span>
                 </div>
               </div>
 
-              {/* Selector de Ocasión Rápido Preview */}
+              {/* Selector de Ocasión Rápido Preview - 4 Botones Interactivos */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs font-mono text-stone-500">
                   <span>Temáticas disponibles:</span>
                   <span className="font-bold text-stone-800">4 Experiencias</span>
                 </div>
                 <div className="grid grid-cols-4 gap-1.5 font-mono text-xs">
-                  {[
-                    { emoji: "🌻", label: "Flores" },
-                    { emoji: "🎂", label: "Cumple" },
-                    { emoji: "🎓", label: "Logro" },
-                    { emoji: "💖", label: "Amor" },
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-2 rounded-xl bg-stone-50 border border-stone-200 text-center hover:bg-amber-50 hover:border-amber-300 transition-colors cursor-default"
-                    >
-                      <div className="text-base">{item.emoji}</div>
-                      <div className="text-[10px] font-medium text-stone-600 mt-0.5">{item.label}</div>
-                    </div>
-                  ))}
+                  {PREVIEW_THEMES.map((theme, idx) => {
+                    const isSelected = idx === activeThemeIdx;
+                    return (
+                      <button
+                        key={theme.id}
+                        type="button"
+                        onClick={() => handleSelectTheme(idx)}
+                        className={`p-2 rounded-xl text-center border transition-all cursor-pointer ${
+                          isSelected
+                            ? theme.activeTabColor + " scale-105"
+                            : "bg-stone-50 hover:bg-stone-100/90 border-stone-200 text-stone-600 hover:text-stone-900"
+                        }`}
+                        title={`Cambiar a ${theme.title}`}
+                      >
+                        <div className="text-base select-none">{theme.emoji}</div>
+                        <div className="text-[10px] font-medium mt-0.5 truncate">{theme.label}</div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
-              {/* Enlace directo a la app */}
+              {/* Enlace directo a la app con la temática seleccionada */}
               <a
-                href="https://flores.modlovelace.com"
+                href={`https://flores.modlovelace.com?theme=${activeTheme.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs font-mono flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                className="w-full py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs font-mono flex items-center justify-center gap-1.5 transition-all shadow-sm hover:shadow-md"
               >
-                <span>Abrir Aplicación Interactiva</span>
+                <span>Abrir {activeTheme.title}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
 
