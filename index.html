@@ -11,12 +11,28 @@
     <meta property="og:description" content="Aprende a personalizar y enviar flores virtuales, dedicatorias con sello de cera y tarjetas para TikTok e Instagram Stories. 100% interactivo y libre de registros." />
     <meta property="og:image" content="/sticker-sunflower.png" />
     <meta property="og:url" content="https://flores.modlovelace.com" />
+    <!-- Anti-flicker script para detección instantánea de tema (Día, Oscuro, Sistema) -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('regala_flores_theme') || 'system';
+          var isDark = saved === 'dark' || (saved === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', '#0c0a09');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
     <!-- Fuentes limpias editorial serif, sans y mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#faf7f2] text-[#292524] antialiased selection:bg-amber-400/30 selection:text-amber-950 min-h-screen">
+  <body class="bg-[#faf7f2] dark:bg-[#0c0a09] text-[#292524] dark:text-[#f5f5f4] antialiased selection:bg-amber-400/30 selection:text-amber-950 dark:selection:bg-amber-500/30 dark:selection:text-amber-200 min-h-screen transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

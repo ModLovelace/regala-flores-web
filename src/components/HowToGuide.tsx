@@ -4,19 +4,19 @@ import { BookOpen, CheckCircle2, ArrowRight, Sparkles, Heart, Shield, Music, Sha
 
 export const HowToGuide: React.FC = () => {
   return (
-    <section id="guia" className="py-20 sm:py-28 border-t border-stone-200/80 bg-[#faf7f2]">
+    <section id="guia" className="py-20 sm:py-28 border-t border-stone-200/80 dark:border-stone-800 bg-[#faf7f2] dark:bg-stone-950/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado de la Guía */}
         <div className="max-w-3xl mx-auto text-center space-y-3 mb-16">
-          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-amber-700 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" />
             <span>02 / Guía Paso a Paso</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 dark:text-stone-100 tracking-tight">
             Cómo usar, configurar y personalizar tu regalo.
           </h2>
-          <p className="text-sm sm:text-base text-stone-600 font-sans leading-relaxed">
+          <p className="text-sm sm:text-base text-stone-600 dark:text-stone-300 font-sans leading-relaxed">
             Una experiencia artesanal en 5 pasos sencillos. Sin descargas pesadas, sin necesidad de registros y con enlace permanente.
           </p>
         </div>
@@ -26,46 +26,46 @@ export const HowToGuide: React.FC = () => {
           {GUIDE_STEPS.map((step, idx) => (
             <div
               key={idx}
-              className="p-6 sm:p-10 rounded-3xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-shadow grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
+              className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-stone-900/90 border border-stone-200/90 dark:border-stone-800 shadow-sm dark:shadow-black/40 hover:shadow-md transition-shadow grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
             >
               
               {/* Columna Número & Título */}
               <div className="lg:col-span-5 space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-3xl sm:text-4xl font-extrabold text-amber-600/80">
+                  <span className="font-mono text-3xl sm:text-4xl font-extrabold text-amber-600/80 dark:text-amber-400">
                     {step.stepNumber}
                   </span>
-                  <span className="px-3 py-1 rounded-full bg-amber-500/10 text-amber-900 text-[11px] font-mono font-semibold border border-amber-400/25">
+                  <span className="px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/20 text-amber-900 dark:text-amber-300 text-[11px] font-mono font-semibold border border-amber-400/25 dark:border-amber-400/30">
                     {step.highlight}
                   </span>
                 </div>
 
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900">
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 dark:text-stone-100">
                   {step.title}
                 </h3>
 
-                <p className="text-sm text-stone-600 leading-relaxed font-sans">
+                <p className="text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-sans">
                   {step.summary}
                 </p>
               </div>
 
               {/* Columna Puntos Clave & Consejos */}
-              <div className="lg:col-span-7 bg-stone-50 rounded-2xl p-6 border border-stone-200/70 space-y-4">
-                <div className="text-xs font-mono font-bold text-stone-500 uppercase tracking-wider">
+              <div className="lg:col-span-7 bg-stone-50 dark:bg-stone-800/60 rounded-2xl p-6 border border-stone-200/70 dark:border-stone-700/70 space-y-4">
+                <div className="text-xs font-mono font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
                   Detalles de configuración:
                 </div>
 
                 <ul className="space-y-2.5">
                   {step.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700 leading-relaxed">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <li key={bIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>{bullet}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* Tip Pro de cada paso */}
-                <div className="pt-3 border-t border-stone-200/80 text-[11px] font-mono text-stone-500 flex items-center gap-2">
+                <div className="pt-3 border-t border-stone-200/80 dark:border-stone-700/80 text-[11px] font-mono text-stone-500 dark:text-stone-400 flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                   <span>
                     {idx === 0 && "Consejo: Cambia entre ocasiones en cualquier momento sin perder la dedicatoria escrita."}
@@ -87,7 +87,7 @@ export const HowToGuide: React.FC = () => {
             href="https://flores.modlovelace.com"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-all shadow-md hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-stone-900 hover:bg-stone-800 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-stone-950 text-white font-bold text-sm transition-all shadow-md hover:-translate-y-0.5"
           >
             <span>Poner en práctica y abrir flores.modlovelace.com</span>
             <ArrowRight className="w-4 h-4" />

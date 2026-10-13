@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { ExternalLink, Sparkles, BookOpen, Menu, X, Heart } from 'lucide-react';
+import { ExternalLink, Sparkles, Menu, X } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-[#faf7f2]/95 backdrop-blur-md border-b border-stone-200/60 transition-all">
+    <header className="sticky top-0 z-50 bg-[#faf7f2]/95 dark:bg-[#0c0a09]/95 backdrop-blur-md border-b border-stone-200/60 dark:border-stone-800/80 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
           
           {/* Logo & Marca Editorial */}
           <a href="#" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 border border-amber-300/70 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 dark:bg-amber-950/60 border border-amber-300/70 dark:border-amber-600/50 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden shrink-0">
               <img
                 src="/sticker-sunflower.png"
                 alt="Logo Regala Flores"
@@ -19,42 +20,46 @@ export const Navbar: React.FC = () => {
               />
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="font-serif font-bold text-base sm:text-xl text-stone-900 tracking-tight whitespace-nowrap">
+              <span className="font-serif font-bold text-base sm:text-xl text-stone-900 dark:text-stone-100 tracking-tight whitespace-nowrap">
                 Regala Flores
               </span>
-              <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-900 border border-amber-400/30 whitespace-nowrap">
+              <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 dark:bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-400/30 dark:border-amber-500/40 whitespace-nowrap">
                 Web Oficial
               </span>
             </div>
           </a>
 
           {/* Navegación Desktop - Limpia, horizontal, concisa y sin wrapping */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-xs xl:text-sm font-sans font-medium text-stone-600">
-            <a href="#ocasiones" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-xs xl:text-sm font-sans font-medium text-stone-600 dark:text-stone-300">
+            <a href="#ocasiones" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap py-1">
               Ocasiones
             </a>
-            <a href="#guia" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
+            <a href="#guia" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap py-1">
               Guía
             </a>
-            <a href="#simulador" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
+            <a href="#simulador" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap py-1">
               Simulador
             </a>
-            <a href="#audio" className="hover:text-stone-950 transition-colors whitespace-nowrap py-1">
+            <a href="#audio" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap py-1">
               Audio Procedural
             </a>
           </nav>
 
           {/* Botones de Acción Derecha */}
-          <div className="hidden sm:flex items-center gap-3 xl:gap-4 shrink-0">
+          <div className="hidden sm:flex items-center gap-2.5 xl:gap-3.5 shrink-0">
+            {/* Selector de Tema (Día / Oscuro / Sistema) */}
+            <ThemeToggle />
+
             <a
               href="https://github.com/ModLovelace/flores-amarillas-primavera"
               target="_blank"
               rel="noreferrer"
-              className="hidden xl:inline-flex items-center gap-1 text-xs text-stone-500 hover:text-stone-900 transition-colors whitespace-nowrap"
+              className="hidden xl:inline-flex items-center gap-1 text-xs text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors whitespace-nowrap px-1"
             >
               <span>GitHub</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
+            
             <a
               href="https://flores.modlovelace.com"
               target="_blank"
@@ -69,6 +74,8 @@ export const Navbar: React.FC = () => {
 
           {/* Botón menú móvil */}
           <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <ThemeToggle />
+
             <a
               href="https://flores.modlovelace.com"
               target="_blank"
@@ -80,7 +87,7 @@ export const Navbar: React.FC = () => {
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 sm:p-2 rounded-xl text-stone-600 hover:bg-stone-200/60 transition-colors"
+              className="p-1.5 sm:p-2 rounded-xl text-stone-600 dark:text-stone-300 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 transition-colors cursor-pointer"
               aria-label="Abrir menú"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -92,32 +99,32 @@ export const Navbar: React.FC = () => {
 
       {/* Menú desplegable móvil */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#faf7f2] border-b border-stone-200/80 px-4 pt-3 pb-6 space-y-3 font-sans text-sm shadow-lg">
+        <div className="lg:hidden bg-[#faf7f2] dark:bg-[#12100e] border-b border-stone-200/80 dark:border-stone-800/80 px-4 pt-3 pb-6 space-y-3 font-sans text-sm shadow-lg">
           <a
             href="#ocasiones"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-stone-800 hover:text-amber-700 font-medium border-b border-stone-200/40"
+            className="block py-2 text-stone-800 dark:text-stone-200 hover:text-amber-700 dark:hover:text-amber-400 font-medium border-b border-stone-200/40 dark:border-stone-800/60"
           >
             🌻 Ocasiones Temáticas
           </a>
           <a
             href="#guia"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-stone-800 hover:text-amber-700 font-medium border-b border-stone-200/40"
+            className="block py-2 text-stone-800 dark:text-stone-200 hover:text-amber-700 dark:hover:text-amber-400 font-medium border-b border-stone-200/40 dark:border-stone-800/60"
           >
             📖 Guía Paso a Paso
           </a>
           <a
             href="#simulador"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-stone-800 hover:text-amber-700 font-medium border-b border-stone-200/40"
+            className="block py-2 text-stone-800 dark:text-stone-200 hover:text-amber-700 dark:hover:text-amber-400 font-medium border-b border-stone-200/40 dark:border-stone-800/60"
           >
             ⚡ Simulador &amp; Generador
           </a>
           <a
             href="#audio"
             onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-stone-800 hover:text-amber-700 font-medium border-b border-stone-200/40"
+            className="block py-2 text-stone-800 dark:text-stone-200 hover:text-amber-700 dark:hover:text-amber-400 font-medium border-b border-stone-200/40 dark:border-stone-800/60"
           >
             🎵 Web Audio API Procedural
           </a>
@@ -134,7 +141,7 @@ export const Navbar: React.FC = () => {
               href="https://github.com/ModLovelace/flores-amarillas-primavera"
               target="_blank"
               rel="noreferrer"
-              className="text-center text-xs text-stone-500 hover:text-stone-800 hover:underline pt-1"
+              className="text-center text-xs text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 hover:underline pt-1"
             >
               Ver código fuente en GitHub ↗
             </a>
