@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, Sparkles, Menu, X } from 'lucide-react';
+import { ExternalLink, Sparkles, Menu, X, ArrowLeft } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar: React.FC = () => {
@@ -10,24 +10,38 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
           
-          {/* Logo & Marca Editorial */}
-          <a href="#" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 dark:bg-amber-950/60 border border-amber-300/70 dark:border-amber-600/50 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden shrink-0">
-              <img
-                src="/sticker-sunflower.png"
-                alt="Logo Regala Flores"
-                className="w-full h-full object-contain filter drop-shadow-xs"
-              />
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="font-serif font-bold text-base sm:text-xl text-stone-900 dark:text-stone-100 tracking-tight whitespace-nowrap">
-                Regala Flores
-              </span>
-              <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 dark:bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-400/30 dark:border-amber-500/40 whitespace-nowrap">
-                Web Oficial
-              </span>
-            </div>
-          </a>
+          {/* Logo & Marca Editorial + Opción Volver a modlovelace.com */}
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            {/* Opción rápida de retorno al proyecto principal */}
+            <a
+              href="https://modlovelace.com"
+              className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-sans font-medium text-stone-700 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white bg-stone-200/70 dark:bg-stone-800/80 hover:bg-stone-200 dark:hover:bg-stone-700 border border-stone-300/80 dark:border-stone-700/80 transition-all group shrink-0 shadow-2xs"
+              title="Volver al proyecto principal: modlovelace.com"
+            >
+              <ArrowLeft className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 transition-transform group-hover:-translate-x-0.5" />
+              <span className="hidden sm:inline font-semibold">modlovelace.com</span>
+            </a>
+
+            <div className="hidden sm:block h-5 w-px bg-stone-300/70 dark:bg-stone-800 shrink-0" />
+
+            <a href="#" className="flex items-center gap-2 sm:gap-2.5 shrink-0 group">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-100/90 dark:bg-amber-950/60 border border-amber-300/70 dark:border-amber-600/50 p-1 flex items-center justify-center shadow-2xs group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+                <img
+                  src="/sticker-sunflower.png"
+                  alt="Logo Regala Flores"
+                  className="w-full h-full object-contain filter drop-shadow-xs"
+                />
+              </div>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-serif font-bold text-base sm:text-xl text-stone-900 dark:text-stone-100 tracking-tight whitespace-nowrap">
+                  Regala Flores
+                </span>
+                <span className="hidden sm:inline-block text-[10px] sm:text-[11px] font-sans font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 dark:bg-amber-500/20 text-amber-900 dark:text-amber-300 border border-amber-400/30 dark:border-amber-500/40 whitespace-nowrap">
+                  Web Oficial
+                </span>
+              </div>
+            </a>
+          </div>
 
           {/* Navegación Desktop - Limpia, horizontal, concisa y sin wrapping */}
           <nav className="hidden lg:flex items-center gap-4 xl:gap-7 text-xs xl:text-sm font-sans font-medium text-stone-600 dark:text-stone-300">
@@ -74,6 +88,15 @@ export const Navbar: React.FC = () => {
 
           {/* Botón menú móvil */}
           <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <a
+              href="https://modlovelace.com"
+              className="p-1.5 rounded-lg text-amber-700 dark:text-amber-400 hover:bg-stone-200/60 dark:hover:bg-stone-800/60 flex items-center gap-1 text-xs"
+              title="Volver a modlovelace.com"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-[11px] font-semibold">modlovelace</span>
+            </a>
+
             <ThemeToggle />
 
             <a
@@ -100,6 +123,14 @@ export const Navbar: React.FC = () => {
       {/* Menú desplegable móvil */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#faf7f2] dark:bg-[#12100e] border-b border-stone-200/80 dark:border-stone-800/80 px-4 pt-3 pb-6 space-y-3 font-sans text-sm shadow-lg">
+          <a
+            href="https://modlovelace.com"
+            className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-amber-500/15 dark:bg-amber-500/20 border border-amber-400/40 dark:border-amber-500/40 text-amber-900 dark:text-amber-300 font-semibold mb-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>← Volver a modlovelace.com</span>
+          </a>
+
           <a
             href="#ocasiones"
             onClick={() => setMobileMenuOpen(false)}

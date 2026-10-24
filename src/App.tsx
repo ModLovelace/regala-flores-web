@@ -8,6 +8,7 @@ import { InteractiveSimulator } from './components/InteractiveSimulator';
 import { AudioShowcase } from './components/AudioShowcase';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
+import { Watermark } from './components/Watermark';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           <CtaSection />
         </main>
         <Footer />
+        <Watermark />
       </div>
     </ThemeProvider>
   );

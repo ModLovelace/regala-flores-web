@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, ExternalLink } from 'lucide-react';
+import { ExternalLink, ArrowLeft } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -27,12 +27,18 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-stone-500 dark:text-stone-400">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-stone-500 dark:text-stone-400">
+            <a
+              href="https://modlovelace.com"
+              className="text-amber-800 dark:text-amber-400 hover:underline font-semibold flex items-center gap-1 transition-colors"
+              title="Volver al proyecto principal modlovelace.com"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>← Volver a modlovelace.com</span>
+            </a>
+            <span className="text-stone-300 dark:text-stone-700 hidden sm:inline">•</span>
             <a href="https://flores.modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
               App en Vivo ↗
-            </a>
-            <a href="https://modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
-              modlovelace.com ↗
             </a>
             <a href="https://catjang.modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
               Catjang-Sue ↗
