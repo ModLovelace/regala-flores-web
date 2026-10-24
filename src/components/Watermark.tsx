@@ -6,16 +6,6 @@ export const Watermark: React.FC = () => {
 
   return (
     <>
-      {/* Marca de agua sutil de fondo (ambient stamp en el canvas, 100% no interactivo ni bloqueante) */}
-      <div
-        className="fixed inset-0 pointer-events-none select-none z-0 overflow-hidden flex items-end justify-start p-6 sm:p-12 opacity-[0.035] dark:opacity-[0.04]"
-        aria-hidden="true"
-      >
-        <div className="font-mono font-black text-6xl sm:text-9xl tracking-widest text-stone-900 dark:text-stone-100 -rotate-12 origin-bottom-left leading-none uppercase">
-          MODLOVELACE
-        </div>
-      </div>
-
       {/* Sello de Autor / Marca de agua flotante discreta (No interfiere con el uso) */}
       <aside
         aria-label="Créditos del desarrollador"
