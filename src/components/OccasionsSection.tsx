@@ -76,7 +76,7 @@ export const OccasionsSection: React.FC = () => {
             <div className="lg:col-span-7 space-y-6">
               <div>
                 <div className="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 tracking-wider uppercase mb-1">
-                  Temática Oficial
+                  Temática Especial
                 </div>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-stone-900 dark:text-stone-100">
                   {selectedOccasion.name}

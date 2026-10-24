@@ -23,7 +23,7 @@ export const CtaSection: React.FC = () => {
             href="https://flores.modlovelace.com"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-stone-950 font-bold text-base transition-all shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:shadow-amber-500/35 hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-stone-950 font-bold text-base transition-all shadow-xl shadow-amber-400/25 hover:shadow-2xl hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0"
           >
             <Sparkles className="w-4 h-4 fill-stone-950" />
             <span>Personalizar y Compartir Mi Regalo ➔</span>

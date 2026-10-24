@@ -151,8 +151,8 @@ export const InteractiveSimulator: React.FC = () => {
               <span className="text-base">{activeOccasion.emoji}</span>
             </div>
 
-            {/* Carta simulada */}
-            <div className="p-4 rounded-xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40 space-y-2.5 font-serif">
+            {/* Carta simulada (Entregable Final) */}
+            <div className="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-400/5 border border-amber-200/70 dark:border-amber-400/20 space-y-2.5 font-serif relative shadow-xs">
               <div className="text-xs font-mono text-stone-500 dark:text-stone-400">
                 Para: <strong className="text-stone-900 dark:text-stone-100 font-serif">{toName || "Destinatario"}</strong>
               </div>
@@ -161,6 +161,16 @@ export const InteractiveSimulator: React.FC = () => {
               </p>
               <div className="text-right text-xs font-mono text-stone-600 dark:text-stone-400">
                 — {fromName || "Remitente"}
+              </div>
+
+              {/* Sello / Marca de agua en el entregable final */}
+              <div className="pt-2.5 mt-2 border-t border-amber-200/60 dark:border-amber-400/15 flex items-center justify-between text-[10px] font-sans text-stone-400 dark:text-stone-500 select-none">
+                <span className="flex items-center gap-1 font-serif italic text-amber-800/80 dark:text-amber-300/80">
+                  🌻 Regalo floral digital
+                </span>
+                <span className="font-mono text-stone-400 dark:text-stone-500 font-medium">
+                  modlovelace.com
+                </span>
               </div>
             </div>
 
@@ -180,7 +190,7 @@ export const InteractiveSimulator: React.FC = () => {
               <button
                 type="button"
                 onClick={handleOpenLive}
-                className="w-full py-3 rounded-full bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-stone-950 font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-500/20 cursor-pointer hover:-translate-y-0.5"
+                className="w-full py-3 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-stone-950 font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-400/25 cursor-pointer hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Sparkles className="w-4 h-4 fill-stone-950" />
                 <span>Abrir &amp; Enviar Mi Regalo en Vivo ➔</span>

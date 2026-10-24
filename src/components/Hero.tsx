@@ -239,9 +239,9 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
             
             {/* Tag superior */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 dark:border-amber-400/20 text-amber-900 dark:text-amber-300 text-xs font-mono font-medium shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 fill-amber-600 dark:fill-amber-400" />
-              <span>Web Oficial &amp; Manual de Experiencia</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 dark:border-amber-400/20 text-amber-900 dark:text-amber-200 text-xs font-mono font-medium shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+              <span>Flores Digitales &amp; Detalles Inolvidables</span>
             </div>
 
             {/* Título Principal Editorial */}
@@ -260,7 +260,7 @@ export const Hero: React.FC = () => {
                 href="https://flores.modlovelace.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-amber-500 to-yellow-600 hover:from-amber-600 hover:to-yellow-700 text-stone-950 font-bold text-sm sm:text-base transition-all shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/35 hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-stone-950 font-bold text-sm sm:text-base transition-all shadow-lg shadow-amber-400/25 hover:shadow-xl hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span>Ir a Personalizar mi Regalo</span>
                 <ArrowRight className="w-4 h-4" />
