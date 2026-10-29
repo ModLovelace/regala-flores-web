@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, ArrowRight, BookOpen, Music, ShieldCheck, Share2 } from 'lucide-react';
+import { Sparkles, ArrowRight, Music, ShieldCheck, Share2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import {
   SunflowerBouquetSVG,
@@ -253,27 +253,6 @@ export const Hero: React.FC = () => {
             <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 max-w-2xl mx-auto lg:mx-0 font-sans leading-relaxed">
               Una plataforma interactiva, estética y emocional diseñada para crear detalles virtuales de alto impacto. Aprende cómo configurar las <strong>4 ocasiones</strong>, redactar cartas con <strong>sello de cera</strong>, activar la <strong>música procedural</strong> y generar <strong>enlaces mágicos</strong> para sorprender por WhatsApp, TikTok e Instagram.
             </p>
-
-            {/* Fila de Botones de Acción */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
-              <a
-                href="https://flores.modlovelace.com"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-stone-950 font-bold text-sm sm:text-base transition-all shadow-lg shadow-amber-400/25 hover:shadow-xl hover:shadow-amber-400/35 hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <span>Ir a Personalizar mi Regalo</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href="#guia"
-                className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 rounded-full bg-white dark:bg-stone-900 hover:bg-stone-50 dark:hover:bg-stone-800 border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200 font-medium text-sm transition-all shadow-xs hover:border-stone-400 dark:hover:border-stone-600"
-              >
-                <BookOpen className="w-4 h-4 text-stone-500 dark:text-stone-400" />
-                <span>Explorar Guía Paso a Paso</span>
-              </a>
-            </div>
 
             {/* Badges de Garantía Técnica y Privacidad */}
             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-6 text-xs font-mono text-stone-500 dark:text-stone-400">
