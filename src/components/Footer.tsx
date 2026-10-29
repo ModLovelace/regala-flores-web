@@ -13,23 +13,32 @@ export const Footer: React.FC = () => {
             </div>
             <div>
               <span className="font-serif font-bold text-stone-900 dark:text-stone-100 text-sm block">
-                Regala Flores
+                Regala Flores · Web Oficial
               </span>
               <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                Detalles florales virtuales interactivos
+                Creado por{" "}
+                <a
+                  href="https://modlovelace.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-amber-700 dark:text-amber-400 hover:underline font-semibold"
+                >
+                  Enrique Becerra (ModLovelace)
+                </a>
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-5 text-stone-500 dark:text-stone-400">
+          <div className="flex flex-wrap items-center justify-center gap-6 text-stone-500 dark:text-stone-400">
             <a href="https://flores.modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               App en Vivo ↗
             </a>
-            <span className="text-stone-300 dark:text-stone-700 hidden sm:inline">•</span>
+            <a href="https://modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+              modlovelace.com ↗
+            </a>
             <a href="https://catjang.modlovelace.com" target="_blank" rel="noreferrer" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
               Catjang-Sue ↗
             </a>
-            <span className="text-stone-300 dark:text-stone-700 hidden sm:inline">•</span>
             <a href="https://github.com/ModLovelace/flores-amarillas-primavera" target="_blank" rel="noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors flex items-center gap-1">
               <span>GitHub</span>
               <ExternalLink className="w-3 h-3" />
